@@ -1,0 +1,14 @@
+#square {
+    display: grid;
+    background-color: aqua;
+    width: 600px;
+    height: 600px;
+}
+
+.blue {
+    border: 1px solid black;
+}
+
+.blue:hover {
+    background-color: darkblue;
+}
