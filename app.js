@@ -1,31 +1,66 @@
-const grid = document.querySelector('#square');
-grid.style.gridTemplateColumns = "repeat(8, 1fr)";
+const grid = document.querySelector('#grid');
+const generateButton = document.querySelector('#generateButton');
+const resetButton = document.querySelector('#resetButton');
+const gridSizeInput = document.querySelector('#gridSize');
+const grayscaleRadioBtn = document.querySelector('#grayscale');
+const randomColorRadioBtn = document.querySelector('#randomColor')
 
-const colorArray = [];
+let gridSize = parseInt(gridSizeInput.value);
+let colorArray = [];
 
-for (let i = 0; i<64; i++) {
-    colorArray[i] = [0,0,100];
+function generateGrid(gridSize) {
+    grid.innerHTML = '';
+    grid.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
 
-    const div = document.createElement('div');
-    
-    div.classList.add('blue');
-    div.setAttribute('data-value', i);
-    
-    div.style.backgroundColor = `hsl(0, 0%, 100%)`;
+    resetColorArray();
 
-    grid.appendChild(div);
+    for (let i = 0; i<gridSize*gridSize; i++) {
+        const div = document.createElement('div');
+        div.classList.add('blue');
+        div.setAttribute('data-value', i);
+        div.style.backgroundColor = getHslColor(i);
+        grid.appendChild(div);
+        div.addEventListener('mouseenter', changeColor);
+    }
+}
 
-    div.addEventListener('mouseenter', changeColor);
+function resetColorArray() {
+    colorArray = [];
+    for (let i = 0; i<gridSize*gridSize; i++) {
+        colorArray[i] = colorArray[i] = [0,0,100];
+    }
+}
+
+
+function getHslColor(itemId) {
+    return `hsl(${colorArray[itemId][0]}, ${colorArray[itemId][1]}%, ${colorArray[itemId][2]}%)`
 }
 
 function changeColor(e) {
     const itemId = e.target.dataset.value
-    console.log(colorArray[itemId]);
-    if (colorArray[itemId][2]>=10) {
-        colorArray[itemId][2] = colorArray[itemId][2] -10;
+    if (grayscaleRadioBtn.checked === true) {
+        if (colorArray[itemId][2]>=10) {
+            colorArray[itemId][2] = colorArray[itemId][2] -10;
+        } else {
+            colorArray[itemId][2] = 0;
+        }
     }
-    let hslColor = `hsl(${colorArray[itemId][0]}, ${colorArray[itemId][1]}%, ${colorArray[itemId][2]}%)`
-    console.log(hslColor);
-    e.target.style.backgroundColor = hslColor;
-
+    if (randomColorRadioBtn.checked === true) {
+        colorArray[itemId][0] = Math.floor(Math.random()*360 +1);
+        colorArray[itemId][1] = Math.floor(Math.random()*100 +1);
+        colorArray[itemId][2] = Math.floor(Math.random()*100 +1);       
+    }
+    e.target.style.backgroundColor = getHslColor(itemId);
 }
+
+resetButton.addEventListener('click', () => {
+
+    generateGrid(gridSize);
+});
+
+generateButton.addEventListener('click', () => {
+    gridSize = parseInt(gridSizeInput.value);
+    generateGrid(gridSize);
+}); 
+
+generateGrid(gridSize);

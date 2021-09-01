@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,10 +8,33 @@
     <title>The Odin Project - Etch-a-Sketch</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div id="square">
 
+<body>
+    <div class="main">
+        <div class="menu">
+            <h3>Etch-a-Sketch</h3>
+            <div>
+                <label for="gridSize">Grid Size (4-64):</label>
+                <input type="number" id="gridSize" name="gridSize" min="4" max="64" value="8">
+                <button id=generateButton>Generate</button>
+            </div>
+
+            <button id=resetButton>Reset</button>
+            <div class="selectors">
+                <label for="grayscale">
+                    <input id="grayscale" type="radio" name="drawingColor" checked>Grayscale
+                </label>
+                <label for="randomColor">
+                    <input id="randomColor" type="radio" name="drawingColor">Random Colors
+                </label>
+            </div>
+
+        </div>
+        <div id="grid">
+
+        </div>
     </div>
     <script src="app.js"></script>
 </body>
+
 </html>

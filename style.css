@@ -1,14 +1,32 @@
-#square {
+.main {
     display: grid;
-    background-color: aqua;
+    background-color: lightgray;
+    max-width: 900px;
+    grid-template-columns: 1fr auto;
+    border: 1px solid darkgray;
+    border-radius: 3px;
+}
+
+.menu {
+
+}
+
+#grid {
+    margin: 50px;
+    display: grid;
     width: 600px;
     height: 600px;
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.19);
 }
 
 .blue {
-    border: 1px solid black;
+    outline: 1px solid black;
 }
 
 .blue:hover {
     background-color: darkblue;
+}
+
+.selectors {
+    
 }
