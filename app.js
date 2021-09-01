@@ -4,6 +4,8 @@ const resetButton = document.querySelector('#resetButton');
 const gridSizeInput = document.querySelector('#gridSize');
 const grayscaleRadioBtn = document.querySelector('#grayscale');
 const randomColorRadioBtn = document.querySelector('#randomColor')
+const mintGridSize = 4;
+const maxGridSize = 64;
 
 let gridSize = parseInt(gridSizeInput.value);
 let colorArray = [];
@@ -60,6 +62,16 @@ resetButton.addEventListener('click', () => {
 
 generateButton.addEventListener('click', () => {
     gridSize = parseInt(gridSizeInput.value);
+
+    if (gridSize > maxGridSize) {
+        gridSize = maxGridSize;
+        gridSizeInput.value = gridSize;
+    }
+    if (gridSize < mintGridSize) {
+        gridSize = mintGridSize;
+        gridSizeInput.value = gridSize;
+    }
+
     generateGrid(gridSize);
 }); 
 
